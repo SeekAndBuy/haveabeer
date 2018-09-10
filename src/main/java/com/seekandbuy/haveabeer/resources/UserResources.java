@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.seekandbuy.haveabeer.dao.UserDao;
 import com.seekandbuy.haveabeer.domain.User;
-import com.seekandbuy.haveabeer.exceptions.InvalidInputException;
-import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 
 @RestController
 @RequestMapping("/user")
