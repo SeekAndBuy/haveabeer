@@ -1,7 +1,5 @@
 /*User*/
 package com.seekandbuy.haveabeer.domain;
-//-Descomentar a linha 4 e 9 apos correão dos erros das depedencias
-//import javax.persistence.Entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
