@@ -30,7 +30,7 @@ public class UserService
 		
 		if(user == null)
 		{
-			throw new UserNotFoundException("O usuário não pôde ser encontrado");
+			throw new UserNotFoundException("User can not be found");
 		}
 		
 		return user;
@@ -50,7 +50,7 @@ public class UserService
 		}
 		catch(EmptyResultDataAccessException e)
 		{
-			throw new UserNotFoundException("O usuário não pôde ser encontrado");
+			throw new UserNotFoundException("User can not be found");
 		}
 	}
 	
