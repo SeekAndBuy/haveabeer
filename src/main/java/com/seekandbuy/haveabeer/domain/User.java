@@ -1,6 +1,8 @@
 /*User*/
 package com.seekandbuy.haveabeer.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,8 @@ public class User {
 	@JsonInclude(Include.NON_NULL)
 	private String nome;
 	
+	private List<Promotion> promotions;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonInclude(Include.NON_NULL)
@@ -23,7 +27,7 @@ public class User {
 	private String cpf;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String endereco;
+	private Endereco endereco;
 	
 	@JsonInclude(Include.NON_NULL)
 	private String email;
@@ -43,10 +47,10 @@ public class User {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 	public String getEmail() {
@@ -66,6 +70,22 @@ public class User {
 	}
 	public void setId(Long id) {
 		Id = id;
+	}
+	
+	public void userCreatePromotion(Promotion promotion) {
+		promotions.add(promotion);
+	}
+	
+	public void userDeletePromotion(Promotion promotion) {
+		promotions.remove(promotion);
+	}
+	
+	public void findPromotion() {
+	
+	}
+	
+	public List<Promotion> getUserPromotions(){
+		return promotions;
 	}
 	
 }
