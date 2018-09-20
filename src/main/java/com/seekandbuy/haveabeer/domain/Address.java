@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-public class Endereco {
+public class Address {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,16 +17,16 @@ public class Endereco {
 	private long id;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String cidade;
+	private String city;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String estado;
+	private String state;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String rua;
+	private String street;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String numero;
+	private String number;
 	
 	public long getId() {
 		return id;
@@ -34,29 +34,29 @@ public class Endereco {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getCidade() {
-		return cidade;
+	public String getCity() {
+		return city;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setCity(String cidade) {
+		this.city = cidade;
 	}
-	public String getEstado() {
-		return estado;
+	public String getState() {
+		return state;
 	}
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setState(String estado) {
+		this.state = estado;
 	}
-	public String getRua() {
-		return rua;
+	public String getStreet() {
+		return street;
 	}
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setStreet(String rua) {
+		this.street = rua;
 	}
-	public String getNumero() {
-		return numero;
+	public String getNumber() {
+		return number;
 	}
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNumber(String numero) {
+		this.number = numero;
 	}
 
 	

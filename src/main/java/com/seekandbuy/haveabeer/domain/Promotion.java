@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Promotion {
 
 	@JsonInclude(Include.NON_NULL)
-	private String tipo;
+	private String type;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,22 +20,22 @@ public class Promotion {
 	private Long Id;
 
 	@JsonInclude(Include.NON_NULL)
-	private String marca;
+	private String brand;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String data;
+	private String date;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String endereco;
+	private String address;
 
 	//Imagem?
 	
-	public String getTipo() {
-		return tipo;
+	public String getType() {
+		return type;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setType(String tipo) {
+		this.type = tipo;
 	}
 
 	public Long getId() {
@@ -46,28 +46,28 @@ public class Promotion {
 		Id = id;
 	}
 
-	public String getMarca() {
-		return marca;
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
+	public void setBrand(String marca) {
+		this.brand = marca;
 	}
 
-	public String getData() {
-		return data;
+	public String getDate() {
+		return date;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void setDate(String data) {
+		this.date = data;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setAddress(String endereco) {
+		this.address = endereco;
 	}
 	
 }

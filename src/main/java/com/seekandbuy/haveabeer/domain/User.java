@@ -14,9 +14,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Entity
 public class User {
 	@JsonInclude(Include.NON_NULL)
-	private String nome;
+	private String name;
 	
-	private List<Promotion> promotions;
+	public List<Promotion> promotions;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,19 +27,19 @@ public class User {
 	private String cpf;
 	
 	@JsonInclude(Include.NON_NULL)
-	private Endereco endereco;
+	private Address address;
 	
 	@JsonInclude(Include.NON_NULL)
 	private String email;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String telefone;
+	private String phone;
 	
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String nome) {
+		this.name = nome;
 	}
 	public String getCpf() {
 		return cpf;
@@ -47,11 +47,11 @@ public class User {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Endereco getEndereco() {
-		return endereco;
+	public Address getAddress() {
+		return address;
 	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setAddress(Address endereco) {
+		this.address = endereco;
 	}
 	public String getEmail() {
 		return email;
@@ -59,11 +59,11 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTelefone() {
-		return telefone;
+	public String getPhone() {
+		return phone;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhone(String telefone) {
+		this.phone = telefone;
 	}
 	public Long getId() {
 		return Id;
@@ -71,21 +71,4 @@ public class User {
 	public void setId(Long id) {
 		Id = id;
 	}
-	
-	public void userCreatePromotion(Promotion promotion) {
-		promotions.add(promotion);
-	}
-	
-	public void userDeletePromotion(Promotion promotion) {
-		promotions.remove(promotion);
-	}
-	
-	public void findPromotion() {
-	
-	}
-	
-	public List<Promotion> getUserPromotions(){
-		return promotions;
-	}
-	
 }
