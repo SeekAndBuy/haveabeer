@@ -1,7 +1,7 @@
 /*User*/
 package com.seekandbuy.haveabeer.domain;
-//-Descomentar a linha 4 e 9 apos correão dos erros das depedencias
-//import javax.persistence.Entity;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Entity
 public class User {
 	@JsonInclude(Include.NON_NULL)
-	private String nome;
+	private String name;
+	
+	public List<Promotion> promotions;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,19 +27,19 @@ public class User {
 	private String cpf;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String endereco;
+	private Address address;
 	
 	@JsonInclude(Include.NON_NULL)
 	private String email;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String telefone;
+	private String phone;
 	
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String nome) {
+		this.name = nome;
 	}
 	public String getCpf() {
 		return cpf;
@@ -45,11 +47,11 @@ public class User {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public String getEndereco() {
-		return endereco;
+	public Address getAddress() {
+		return address;
 	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setAddress(Address endereco) {
+		this.address = endereco;
 	}
 	public String getEmail() {
 		return email;
@@ -57,11 +59,11 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTelefone() {
-		return telefone;
+	public String getPhone() {
+		return phone;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhone(String telefone) {
+		this.phone = telefone;
 	}
 	public Long getId() {
 		return Id;
@@ -69,5 +71,4 @@ public class User {
 	public void setId(Long id) {
 		Id = id;
 	}
-	
 }
