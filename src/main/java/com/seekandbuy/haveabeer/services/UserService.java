@@ -12,14 +12,13 @@ import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 
 @Service
-public class UserService 
+public class UserService
 {
 	
 	@Autowired
 	private UserDao userDao;
-	
-	
-	public List<User> listar()
+		
+	public List<User> list()
 	{
 		return userDao.findAll();  
 	}

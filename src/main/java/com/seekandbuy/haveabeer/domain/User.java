@@ -8,11 +8,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Builder;
+import lombok.Value;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.Collection;
 
 @Entity
-public class User {
+@Builder
+@Value
+public class User implements UserDetails{
+	
+	private static final long serialVersionUID = 2396654715019746670L;
+
 	@JsonInclude(Include.NON_NULL)
 	private String name;
 	
@@ -20,9 +38,12 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonInclude(Include.NON_NULL)
-	private Long Id;
+	Long id;
 
+	String username;
+	
+	String password;
+	
 	@JsonInclude(Include.NON_NULL)
 	private String cpf;
 	
@@ -35,6 +56,14 @@ public class User {
 	@JsonInclude(Include.NON_NULL)
 	private String phone;
 	
+	@JsonCreator
+	public User( @JsonProperty("username") final String username, @JsonProperty("password") final String password) 
+	{
+	    super();
+	    this.username = requireNonNull(username);
+	    this.password = requireNonNull(password);
+	}
+		
 	public String getName() {
 		return name;
 	}
@@ -66,9 +95,49 @@ public class User {
 		this.phone = telefone;
 	}
 	public Long getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
+	
+	@JsonIgnore
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {		
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		return null;
+	}
+	
 }
