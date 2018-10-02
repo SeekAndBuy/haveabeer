@@ -7,26 +7,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 public class User {
-	@JsonInclude(Include.NON_NULL)
-	private String name;
-	
-	public List<Promotion> promotions;
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonInclude(Include.NON_NULL)
 	private Long Id;
 
 	@JsonInclude(Include.NON_NULL)
-	private String cpf;
+	private String name;
 	
 	@JsonInclude(Include.NON_NULL)
+	private String cpf;
+	
+	
+	@JsonInclude(Include.NON_NULL)
+	@ManyToOne
+	@JoinColumn(name="address_id")
+	@Cascade(CascadeType.PERSIST)
 	private Address address;
 	
 	@JsonInclude(Include.NON_NULL)
@@ -47,12 +56,14 @@ public class User {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
 	public Address getAddress() {
 		return address;
 	}
+	
 	public void setAddress(Address endereco) {
 		this.address = endereco;
-	}
+	}	
 	public String getEmail() {
 		return email;
 	}

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -28,7 +29,10 @@ public class Promotion {
 	@JsonInclude(Include.NON_NULL)
 	private String address;
 
-	//Imagem?
+	@JsonInclude(Include.NON_NULL)
+	@ManyToOne
+	private User user;
+	
 	
 	public String getType() {
 		return type;
@@ -68,6 +72,14 @@ public class Promotion {
 
 	public void setAddress(String endereco) {
 		this.address = endereco;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.seekandbuy.haveabeer.dao.UserDao;
+import com.seekandbuy.haveabeer.domain.Address;
 import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 
@@ -17,6 +18,7 @@ public class UserService
 	
 	@Autowired
 	private UserDao userDao;
+	
 	
 	
 	public List<User> listar()
@@ -38,7 +40,9 @@ public class UserService
 	
 	public User userCreate(User user) 
 	{
-		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma		
+		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
+		Address address = user.getAddress();
+		
 		return userDao.save(user);	
 	}
 	
