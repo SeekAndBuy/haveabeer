@@ -65,4 +65,9 @@ public class PromotionService
 	{
 		findPromotion(promotion.getId());
 	}
+	
+	public List<Promotion> getPromotionByUserId(Long id) {
+		
+	}
+	
 }

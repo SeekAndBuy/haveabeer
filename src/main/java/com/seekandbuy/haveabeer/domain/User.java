@@ -29,8 +29,10 @@ public class User {
 	private String name;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String cpf;
+	private String password;
 	
+	@JsonInclude(Include.NON_NULL)
+	private String cpf;
 	
 	@JsonInclude(Include.NON_NULL)
 	@ManyToOne
@@ -56,11 +58,9 @@ public class User {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
 	public Address getAddress() {
 		return address;
 	}
-	
 	public void setAddress(Address endereco) {
 		this.address = endereco;
 	}	
@@ -81,5 +81,11 @@ public class User {
 	}
 	public void setId(Long id) {
 		Id = id;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

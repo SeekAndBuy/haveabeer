@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -27,11 +30,23 @@ public class Promotion {
 	private String date;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String address;
+	@Cascade(CascadeType.PERSIST)
+	private Address address;
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	@JsonInclude(Include.NON_NULL)
 	@ManyToOne
 	private User user;
+	
+	@JsonInclude(Include.NON_NULL)
+	private double price;
 	
 	
 	public String getType() {
@@ -66,13 +81,7 @@ public class Promotion {
 		this.date = data;
 	}
 
-	public String getAddress() {
-		return address;
-	}
 
-	public void setAddress(String endereco) {
-		this.address = endereco;
-	}
 
 	public User getUser() {
 		return user;
@@ -80,6 +89,14 @@ public class Promotion {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
 }

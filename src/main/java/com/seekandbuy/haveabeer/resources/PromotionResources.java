@@ -94,4 +94,9 @@ public class PromotionResources
 		return ResponseEntity.noContent().build();
 	}
 	
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Optional<Promotion>> findPromotionByUserId(@PathVariable("id") Long id) {
+		return null;
+	}
+	
 }

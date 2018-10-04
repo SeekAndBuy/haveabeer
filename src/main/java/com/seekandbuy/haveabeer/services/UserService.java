@@ -42,6 +42,11 @@ public class UserService
 	{
 		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
 		Address address = user.getAddress();
+		String password = user.getPassword();
+		
+		//Implementar password = tokenizar(password);  
+		
+		user.setPassword(password);
 		
 		return userDao.save(user);	
 	}
@@ -69,4 +74,7 @@ public class UserService
 	{
 		findUser(user.getId());
 	}
+
+	
+	
 }
