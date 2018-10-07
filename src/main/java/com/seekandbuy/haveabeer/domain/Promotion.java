@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Cascade;
@@ -30,16 +31,10 @@ public class Promotion {
 	private String date;
 	
 	@JsonInclude(Include.NON_NULL)
+	@ManyToOne
+	@JoinColumn(name="address_id")
 	@Cascade(CascadeType.PERSIST)
 	private Address address;
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 
 	@JsonInclude(Include.NON_NULL)
 	@ManyToOne
@@ -97,6 +92,13 @@ public class Promotion {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 }

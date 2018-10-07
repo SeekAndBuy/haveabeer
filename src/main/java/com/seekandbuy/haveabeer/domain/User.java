@@ -33,12 +33,12 @@ public class User {
 	
 	@JsonInclude(Include.NON_NULL)
 	private String cpf;
-	
+	/*
 	@JsonInclude(Include.NON_NULL)
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	@Cascade(CascadeType.PERSIST)
-	private Address address;
+	private Address address;*/
 	
 	@JsonInclude(Include.NON_NULL)
 	private String email;
@@ -58,12 +58,6 @@ public class User {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address endereco) {
-		this.address = endereco;
-	}	
 	public String getEmail() {
 		return email;
 	}

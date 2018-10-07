@@ -41,7 +41,6 @@ public class UserService
 	public User userCreate(User user) 
 	{
 		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
-		Address address = user.getAddress();
 		String password = user.getPassword();
 		
 		//Implementar password = tokenizar(password);  
