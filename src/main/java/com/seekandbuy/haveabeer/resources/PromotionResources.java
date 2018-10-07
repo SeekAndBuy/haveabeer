@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.seekandbuy.haveabeer.domain.Promotion;
+import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.PromotionNotFoundException;
+import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 import com.seekandbuy.haveabeer.services.PromotionService;
 
 @RestController
@@ -95,8 +97,21 @@ public class PromotionResources
 	}
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Optional<Promotion>> findPromotionByUserId(@PathVariable("id") Long id) {
-		return null;
+	public ResponseEntity<List<Promotion>> findPromotionByUserId(@PathVariable("id") Long id) {
+		
+		List<Promotion> userPromotions = null;
+		
+		//return ResponseEntity.status(HttpStatus.OK).body(promotionService.listar());
+		try
+		{
+			userPromotions = promotionService.getPromotionByUserId(id);
+		}
+		catch(UserNotFoundException e)
+		{
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(userPromotions);
 	}
 	
 }

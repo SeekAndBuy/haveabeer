@@ -7,13 +7,12 @@ public class PromotionManager {
 
 	//ESSE MÉTODO DE BUSCA É SÓ PARA USUARIO, EXISTIRA OUTRO PARA O FEED
 	//DISCUTIR SE NAO É MELHOR CRIAR UMA INTERFACE PARA BUSCAR UMA PROMOCAO
-	/*
-	public Promotion findPromotion(short findType, String arg) {
+	/*public Promotion findPromotion(short findType, String arg) 
+	{
 		switch (findType) {
 		case 0:
 		}
 	}
-	
 	
 	private Promotion findByAddress(String arg)
 	{
@@ -35,5 +34,4 @@ public class PromotionManager {
 		return null;
 	}
 	*/
-	
 }
