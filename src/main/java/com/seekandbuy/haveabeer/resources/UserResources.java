@@ -8,7 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +21,10 @@ import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 import com.seekandbuy.haveabeer.services.UserService; 
 
+
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins="http://localhost:4200")
 public class UserResources 
 {	
 	@Autowired
@@ -37,7 +41,7 @@ public class UserResources
 		return ResponseEntity.status(HttpStatus.OK).body(userService.listar());
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<Void> userCreate(@RequestBody User user) 
 	{
 		user = userService.userCreate(user);
