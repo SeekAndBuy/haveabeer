@@ -3,6 +3,7 @@ package com.seekandbuy.haveabeer.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,17 +101,18 @@ public class UserResources
 	}
 	
 	@RequestMapping(value = "/user/{email}", method = RequestMethod.POST)
-	public ResponseEntity<User> findUser(@PathVariable("email") String email, @PathVariable("password") String password) {
-		
+	public ResponseEntity<User> findUser(@PathVariable Map<String, Object> credential) {
 		User user = null;
-		
+		String password = (String) credential.get("password");
+		String email = (String) credential.get("email");
 		try
 		{
 			user = userService.findUser(password, email);
 		}
 		catch(Exception e)
 		{
-			//return e.getMessage();
+			return ResponseEntity.badRequest().build();
+			
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(user);
