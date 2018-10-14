@@ -14,6 +14,6 @@ import com.seekandbuy.haveabeer.domain.Promotion;
 @Repository
 public interface PromotionDao extends JpaRepository<Promotion, Long>
 {
-	@Query("SELECT p FROM Promotion p WHERE USERID(p.Id) = USERID(:userId)")
+	@Query("SELECT p FROM Promotion p WHERE p.Id = :userId")
 	public List<Promotion> getPromotionByUserId(@Param("userId") Long id);
 }

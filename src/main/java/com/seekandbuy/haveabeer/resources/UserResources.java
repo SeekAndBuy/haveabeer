@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.seekandbuy.haveabeer.domain.Promotion;
 import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 import com.seekandbuy.haveabeer.services.UserService; 
@@ -96,6 +97,23 @@ public class UserResources
 		}
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/user/{email}", method = RequestMethod.POST)
+	public ResponseEntity<User> findUser(@PathVariable("email") String email, @PathVariable("password") String password) {
+		
+		User user = null;
+		
+		try
+		{
+			user = userService.findUser(password, email);
+		}
+		catch(Exception e)
+		{
+			//return e.getMessage();
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 	
 }
