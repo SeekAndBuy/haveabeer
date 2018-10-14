@@ -100,11 +100,13 @@ public class UserResources
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(value = "/user/{email}", method = RequestMethod.POST)
-	public ResponseEntity<User> findUser(@PathVariable Map<String, Object> credential) {
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public ResponseEntity<User> findUser(@RequestBody Map<String, Object> credential) {
 		User user = null;
+		
 		String password = (String) credential.get("password");
 		String email = (String) credential.get("email");
+		
 		try
 		{
 			user = userService.findUser(password, email);
