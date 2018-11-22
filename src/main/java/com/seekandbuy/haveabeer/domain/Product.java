@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -13,20 +14,14 @@ import org.hibernate.annotations.CascadeType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Entity
-public class Product {
-
-	@JsonInclude(Include.NON_NULL)
-	private String type;
+@MappedSuperclass
+public abstract class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonInclude(Include.NON_NULL)
 	private Long Id;
 
-	@JsonInclude(Include.NON_NULL)
-	private String brand;
-	
 	@JsonInclude(Include.NON_NULL)
 	private String date;
 	
@@ -40,32 +35,12 @@ public class Product {
 	@ManyToOne
 	private User user;
 	
-	@JsonInclude(Include.NON_NULL)
-	private double price;
-	
-	
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String tipo) {
-		this.type = tipo;
-	}
-
 	public Long getId() {
 		return Id;
 	}
 
 	public void setId(Long id) {
 		Id = id;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String marca) {
-		this.brand = marca;
 	}
 
 	public String getDate() {
@@ -76,8 +51,6 @@ public class Product {
 		this.date = data;
 	}
 
-
-
 	public User getUser() {
 		return user;
 	}
@@ -85,20 +58,13 @@ public class Product {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
+	
 	public Address getAddress() {
 		return address;
 	}
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
+	}	
 	
 }

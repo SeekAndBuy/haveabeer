@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,9 +19,8 @@ import org.hibernate.annotations.CascadeType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Entity
-@Table(name="User")
-public class User {
+@MappedSuperclass
+public abstract class User {
 		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,19 +34,7 @@ public class User {
 	private String password;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String cpf;
-	/*
-	@JsonInclude(Include.NON_NULL)
-	@ManyToOne
-	@JoinColumn(name="address_id")
-	@Cascade(CascadeType.PERSIST)
-	private Address address;*/
-	
-	@JsonInclude(Include.NON_NULL)
 	private String email;
-	
-	@JsonInclude(Include.NON_NULL)
-	private String phone;
 	
 	public String getName() {
 		return name;
@@ -54,23 +42,11 @@ public class User {
 	public void setName(String nome) {
 		this.name = nome;
 	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String telefone) {
-		this.phone = telefone;
 	}
 	public Long getId() {
 		return Id;

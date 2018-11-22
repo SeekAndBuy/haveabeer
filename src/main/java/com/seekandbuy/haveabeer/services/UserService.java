@@ -9,25 +9,26 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.seekandbuy.haveabeer.dao.UserDao;
+import com.seekandbuy.haveabeer.domain.BeerUser;
 import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 
 @Service
-public class UserService implements GenericService<User>
+public class UserService implements GenericService<BeerUser>
 {	
 	@Autowired
 	private UserDao userDao;
 	
 	@Override
-	public List<User> listItem()
+	public List<BeerUser> listItem()
 	{
 		return userDao.findAll();  
 	}
 	
 	@Override
-	public Optional<User> findItem(Long id)
+	public Optional<BeerUser> findItem(Long id)
 	{
-		Optional<User> user = userDao.findById(id);
+		Optional<BeerUser> user = userDao.findById(id);
 		
 		if(user == null)
 		{
@@ -46,7 +47,7 @@ public class UserService implements GenericService<User>
 	}
 		
 	@Override
-	public User createItem(User user) 
+	public BeerUser createItem(BeerUser user) 
 	{	
 		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
 		String password = user.getPassword();
@@ -71,7 +72,7 @@ public class UserService implements GenericService<User>
 	}
 	
 	@Override
-	public void updateItem(User user)
+	public void updateItem(BeerUser user)
 	{
 		verifyExistence(user);
 		userDao.save(user);
@@ -79,7 +80,7 @@ public class UserService implements GenericService<User>
 	
 	//Semântica melhor, só verifica existência 
 	@Override
-	public void verifyExistence(User user)
+	public void verifyExistence(BeerUser user)
 	{
 		findItem(user.getId());
 	}	
