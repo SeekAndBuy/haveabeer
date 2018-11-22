@@ -38,13 +38,13 @@ public class UserResources
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<User>> ListUsers() 
 	{
-		return ResponseEntity.status(HttpStatus.OK).body(userService.listar());
+		return ResponseEntity.status(HttpStatus.OK).body(userService.listItem());
 	}
 	
 	@PostMapping
 	public ResponseEntity<Void> userCreate(@RequestBody User user) 
 	{
-		user = userService.userCreate(user);
+		user = userService.createItem(user);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(user.getId()).toUri();
@@ -58,7 +58,7 @@ public class UserResources
 		Optional<User> user = null;
 		try
 		{
-			user = userService.findUser(id);
+			user = userService.findItem(id);
 		}catch(UserNotFoundException e)
 		{
 			return ResponseEntity.notFound().build();
@@ -72,7 +72,7 @@ public class UserResources
 	{ 
 		try
 		{
-			userService.deleteUser(id);
+			userService.deleteItem(id);
 		}
 		catch(UserNotFoundException e)
 		{
@@ -88,7 +88,7 @@ public class UserResources
 		user.setId(id); // Garantir que o que vai ser atualizado é o que está vindo na URI
 		try
 		{
-			userService.updateUser(user);
+			userService.updateItem(user);
 		}
 		catch(UserNotFoundException e)
 		{
@@ -99,3 +99,4 @@ public class UserResources
 	}
 	
 }
+
