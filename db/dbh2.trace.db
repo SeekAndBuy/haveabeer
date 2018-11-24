@@ -961,3 +961,9 @@ select beeruser0_.id as id2_2_, beeruser0_.email as email3_2_, beeruser0_.name a
 2018-11-22 10:19:16 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO BEER_USER VALUES (NULL, IGORNOGUEIR@[*]GMAIL.COM, IGOR, 1234511) "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
 INSERT INTO BEER_USER VALUES (null, igornogueir@gmail.com, Igor, 1234511) [42001-197]
+2018-11-22 10:53:57 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "STRINGDECODE('\t') (BEER_CHARACTERISTIC: ID BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."BEER_CHARACTERISTIC"("ID","BRAND","PRICE")VALUES(?,?,?) -- (?1, ?2, ?3) [22018-197]
+2018-11-22 10:53:57 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "STRINGDECODE('\t') (BEER_CHARACTERISTIC: ID BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."BEER_CHARACTERISTIC"("ID","BRAND","PRICE")VALUES(?,?,?) -- (?1, ?2, ?3) [22018-197]

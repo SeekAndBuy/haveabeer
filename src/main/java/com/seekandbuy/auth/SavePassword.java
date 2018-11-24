@@ -1,19 +1,19 @@
-package com.seekandbuy.haveabeer.auth;
+package com.seekandbuy.auth;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-//import com.seekandbuy.haveabeer.dao.UserDao;
-//import com.seekandbuy.haveabeer.domain.User;
-//import com.seekandbuy.haveabeer.exceptions.PromotionNotFoundException;
+import com.seekandbuy.domain.User;
+import com.seekandbuy.haveabeer.dao.UserDao;
+import com.seekandbuy.haveabeer.exceptions.ProductNotFoundException;
 import com.seekandbuy.haveabeer.exceptions.TokenNotFoundException;
 
-public class Authentication {
-	//private UserDao userDao;
+public class SavePassword {
+	private UserDao userDao;
 	private Map<String, Object> codification;
 	
-	public Authentication(){
+	public SavePassword(){
 		codification = new HashMap<String, Object>();
 	}
 	
@@ -37,7 +37,7 @@ public class Authentication {
 		
 		String token = (String) codification.get(password);
 		if(token == null) {
-			throw new TokenNotFoundException("Please, put the correct password!");
+			throw new TokenNotFoundException("Token can not be found. Please, put the correct password!");
 		}
 		return token;
 		

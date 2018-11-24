@@ -7,27 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.seekandbuy.domain.Product;
 import com.seekandbuy.haveabeer.dao.ProductDao;
-import com.seekandbuy.haveabeer.domain.Product;
+import com.seekandbuy.haveabeer.domain.Beer;
 import com.seekandbuy.haveabeer.exceptions.ProductNotFoundException;
+import com.seekandbuy.services.GenericService;
 
 @Service
-public class ProductService implements GenericService<Product>
+public class ProductService implements GenericService<Beer>
 {
 	
 	@Autowired
 	private ProductDao promotionDao;
 	
 	@Override
-	public List<Product> listItem()
+	public List<Beer> listItem()
 	{
 		return promotionDao.findAll();  
 	}
 	
 	@Override
-	public Optional<Product> findItem(Long id)
+	public Optional<Beer> findItem(Long id)
 	{
-		Optional<Product> promotion = promotionDao.findById(id);
+		Optional<Beer> promotion = promotionDao.findById(id);
 		
 		if(promotion == null)
 		{
@@ -38,7 +40,7 @@ public class ProductService implements GenericService<Product>
 	}
 	
 	@Override
-	public Product createItem(Product promotion) 
+	public Beer createItem(Beer promotion) 
 	{
 		promotion.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma		
 		return promotionDao.save(promotion);	
@@ -58,7 +60,7 @@ public class ProductService implements GenericService<Product>
 	}
 	
 	@Override
-	public void updateItem(Product promotion)
+	public void updateItem(Beer promotion)
 	{
 		verifyExistence(promotion);
 		promotionDao.save(promotion);
@@ -66,12 +68,12 @@ public class ProductService implements GenericService<Product>
 	
 	//Semântica melhor, só verifica existência 
 	@Override
-	public void verifyExistence(Product promotion)
+	public void verifyExistence(Beer promotion)
 	{
 		findItem(promotion.getId());
 	}
 	
-	public List<Product> getPromotionByUserId(Long id) 
+	public List<Beer> getPromotionByUserId(Long id) 
 	{
 		return promotionDao.getPromotionByUserId(id);
 	}

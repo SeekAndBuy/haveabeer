@@ -1,4 +1,7 @@
-package com.seekandbuy.haveabeer.domain;
+/*User*/
+package com.seekandbuy.domain;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -15,56 +20,44 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @MappedSuperclass
-public abstract class Product {
-	
+public abstract class User {
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonInclude(Include.NON_NULL)
 	private Long Id;
 
 	@JsonInclude(Include.NON_NULL)
-	private String date;
+	private String name;
 	
 	@JsonInclude(Include.NON_NULL)
-	@ManyToOne
-	@JoinColumn(name="address_id")
-	@Cascade(CascadeType.PERSIST)
-	private Address address;
-
-	@JsonInclude(Include.NON_NULL)
-	@ManyToOne
-	private User user;
+	private String password;
 	
+	@JsonInclude(Include.NON_NULL)
+	private String email;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String nome) {
+		this.name = nome;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public Long getId() {
 		return Id;
 	}
-
-	public void setId(Long id) {
-		Id = id;
+	public void setId(Long i) {
+		Id = i;
 	}
-
-	public String getDate() {
-		return date;
+	public String getPassword() {
+		return password;
 	}
-
-	public void setDate(String data) {
-		this.date = data;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}	
-	
 }

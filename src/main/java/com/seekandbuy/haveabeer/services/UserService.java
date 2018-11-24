@@ -7,11 +7,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.seekandbuy.domain.User;
 import com.seekandbuy.haveabeer.dao.UserDao;
+import com.seekandbuy.haveabeer.domain.BeerCharacteristic;
 import com.seekandbuy.haveabeer.domain.BeerUser;
-import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
+import com.seekandbuy.services.GenericService;
 
 @Service
 public class UserService implements GenericService<BeerUser>
@@ -50,10 +55,15 @@ public class UserService implements GenericService<BeerUser>
 	public BeerUser createItem(BeerUser user) 
 	{	
 		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
+		user.getBeerCharacteristic().setId(null);		
+		
 		String password = user.getPassword();
 				
 		String token = auth.tokenizerPassword(password);
 		user.setPassword(token);
+		
+		System.out.println();
+		
 		
 		return userDao.save(user);
 	}

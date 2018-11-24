@@ -1,4 +1,4 @@
-package com.seekandbuy.haveabeer.resources;
+package com.seekandbuy.resources;
 
 import java.util.List;
 import java.util.Optional;

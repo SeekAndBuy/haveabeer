@@ -1,12 +1,12 @@
-package com.seekandbuy.haveabeer;
+package com.seekandbuy.run;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HaveabeerApplication {
+public class SeekAndBuyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HaveabeerApplication.class, args);
+		SpringApplication.run(SeekAndBuyApplication.class, args);
 	}
 }

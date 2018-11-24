@@ -18,17 +18,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.seekandbuy.haveabeer.domain.Product;
+import com.seekandbuy.domain.Product;
+import com.seekandbuy.haveabeer.domain.Beer;
 //import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.ProductNotFoundException;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 import com.seekandbuy.haveabeer.services.ProductService;
+import com.seekandbuy.resources.GenericResources;
 
 
 @RestController
 @RequestMapping("/promotions")
 @CrossOrigin(origins="http://localhost:4200")
-public class ProductResources implements GenericResources<Product>
+public class ProductResources implements GenericResources<Beer>
 {
 	private ProductService promotionService;
 	
@@ -38,12 +40,12 @@ public class ProductResources implements GenericResources<Product>
 	}
 
 	@Override
-	public ResponseEntity<List<Product>> listItem() {
+	public ResponseEntity<List<Beer>> listItem() {
 		return ResponseEntity.status(HttpStatus.OK).body(promotionService.listItem());
 	}
 
 	@Override
-	public ResponseEntity<Void> createItem(Product promotion) {
+	public ResponseEntity<Void> createItem(Beer promotion) {
 		promotion = promotionService.createItem(promotion);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
@@ -53,8 +55,8 @@ public class ProductResources implements GenericResources<Product>
 	}
 
 	@Override
-	public ResponseEntity<Optional<Product>> findItem(Long id) {
-		Optional<Product> promotion = null;
+	public ResponseEntity<Optional<Beer>> findItem(Long id) {
+		Optional<Beer> promotion = null;
 		try
 		{
 			promotion = promotionService.findItem(id);
@@ -81,7 +83,7 @@ public class ProductResources implements GenericResources<Product>
 	}
 
 	@Override
-	public ResponseEntity<Void> updateItem(Product product, Long id) {
+	public ResponseEntity<Void> updateItem(Beer product, Long id) {
 		product.setId(id); // Garantir que o que vai ser atualizado é o que está vindo na URI
 		try
 		{
@@ -96,8 +98,8 @@ public class ProductResources implements GenericResources<Product>
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<Product>> findPromotionByUserId(@PathVariable("id") Long id){
-		List<Product> userPromotions = null;
+	public ResponseEntity<List<Beer>> findPromotionByUserId(@PathVariable("id") Long id){
+		List<Beer> userPromotions = null;
 		
 		try
 		{

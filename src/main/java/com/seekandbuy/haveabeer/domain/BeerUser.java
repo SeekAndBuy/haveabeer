@@ -10,6 +10,7 @@ import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.seekandbuy.domain.User;
 
 @Entity
 @Table(name="BeerUser")

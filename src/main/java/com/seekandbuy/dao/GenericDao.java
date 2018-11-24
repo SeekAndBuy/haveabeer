@@ -1,5 +1,5 @@
 
-package com.seekandbuy.haveabeer.dao;
+package com.seekandbuy.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;

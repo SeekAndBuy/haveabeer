@@ -7,15 +7,13 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.seekandbuy.domain.Characteristic;
 
 @Entity
 public class BeerCharacteristic extends Characteristic{
 	
 	
-	@Id
-	@JsonInclude(Include.NON_NULL)
-	private Long Id;
-
+	
 	@JsonInclude(Include.NON_NULL)
 	private String brand;
 		
@@ -23,14 +21,7 @@ public class BeerCharacteristic extends Characteristic{
 	private double price;
 	
 	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return Id;
-	}
 
-	public void setId(Long id) {
-		Id = id;
-	}
 
 	public String getBrand() {
 		return brand;

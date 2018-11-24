@@ -1,11 +1,11 @@
-package com.seekandbuy.haveabeer.services;
+package com.seekandbuy.services;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.seekandbuy.haveabeer.auth.Authentication;
+import com.seekandbuy.auth.Authentication;
 
 @Service
 public interface GenericService<T> 

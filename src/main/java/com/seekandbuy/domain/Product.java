@@ -1,7 +1,4 @@
-/*User*/
-package com.seekandbuy.haveabeer.domain;
-
-import java.util.List;
+package com.seekandbuy.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -20,44 +15,48 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @MappedSuperclass
-public abstract class User {
-		
+public abstract class Product {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonInclude(Include.NON_NULL)
 	private Long Id;
 
 	@JsonInclude(Include.NON_NULL)
-	private String name;
+	private String date;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String password;
+	@ManyToOne
+	@JoinColumn(name="address_id")
+	@Cascade(CascadeType.PERSIST)
+	private Address address;
+
+
 	
-	@JsonInclude(Include.NON_NULL)
-	private String email;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String nome) {
-		this.name = nome;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public Long getId() {
 		return Id;
 	}
+
 	public void setId(Long id) {
 		Id = id;
 	}
-	public String getPassword() {
-		return password;
+
+	public String getDate() {
+		return date;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setDate(String data) {
+		this.date = data;
 	}
+
+	
+	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}	
+	
 }

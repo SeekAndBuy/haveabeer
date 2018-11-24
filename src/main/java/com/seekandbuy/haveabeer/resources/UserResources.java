@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.seekandbuy.domain.User;
 import com.seekandbuy.haveabeer.domain.BeerUser;
-//import com.seekandbuy.haveabeer.domain.Product;
-import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
-import com.seekandbuy.haveabeer.services.UserService; 
+import com.seekandbuy.haveabeer.services.UserService;
+import com.seekandbuy.resources.GenericResources; 
 
 
 @RestController
@@ -44,7 +44,8 @@ public class UserResources implements GenericResources<BeerUser>
 	}
 
 	@Override
-	public ResponseEntity<Void> createItem(BeerUser user) {
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> createItem(@RequestBody BeerUser user) {
 		user = userService.createItem(user);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().

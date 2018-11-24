@@ -1,4 +1,4 @@
-package com.seekandbuy.haveabeer.domain;
+package com.seekandbuy.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
