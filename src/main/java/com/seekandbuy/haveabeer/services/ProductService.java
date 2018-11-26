@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.seekandbuy.haveabeer.domain.Beer;
 import com.seekandbuy.haveabeer.dao.ProductDao;
@@ -38,9 +41,11 @@ public class ProductService implements GenericService<Beer>
 	}
 	
 	@Override
-	public Beer createItem(Beer promotion) 
+	@RequestMapping(method = RequestMethod.POST)
+	public Beer createItem(@RequestBody Beer promotion) 
 	{
-		promotion.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma		
+		promotion.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma	
+		//promotion.getBeerCharacteristic().setId(null);
 		return promotionDao.save(promotion);	
 	}
 	

@@ -44,8 +44,7 @@ public class UserResources implements GenericResources<BeerUser>
 	}
 
 	@Override
-	@RequestMapping(method = RequestMethod.POST)
-	
+	@RequestMapping(method = RequestMethod.POST)	
 	public ResponseEntity<Void> createItem(@RequestBody BeerUser user) {
 		user = userService.createItem(user);
 		
