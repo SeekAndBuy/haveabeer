@@ -50,6 +50,8 @@ public class UserService implements GenericService<BeerUser>
 	public BeerUser createItem(BeerUser user) 
 	{	
 		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
+		user.getBeerCharacteristic().setId(null);		
+
 		String password = user.getPassword();
 				
 		String token = auth.tokenizerPassword(password);
