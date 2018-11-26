@@ -14,6 +14,6 @@ import com.seekandbuy.haveabeer.domain.Product;
 @Repository
 public interface ProductDao extends GenericDao, JpaRepository<Product, Long>
 {
-	@Query("SELECT p FROM Product p WHERE USERID(p.Id) = USERID(:userId)")
+	@Query("SELECT p FROM Beer p WHERE USERID(p.Id) = USERID(:userId)")
 	public List<Product> getPromotionByUserId(@Param("userId") Long id);
 }

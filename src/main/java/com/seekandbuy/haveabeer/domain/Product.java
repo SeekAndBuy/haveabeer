@@ -30,10 +30,6 @@ public abstract class Product {
 	@JoinColumn(name="address_id")
 	@Cascade(CascadeType.PERSIST)
 	private Address address;
-
-	@JsonInclude(Include.NON_NULL)
-	@ManyToOne
-	private User user;
 	
 	public Long getId() {
 		return Id;
@@ -51,13 +47,6 @@ public abstract class Product {
 		this.date = data;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 	
 	public Address getAddress() {
 		return address;
