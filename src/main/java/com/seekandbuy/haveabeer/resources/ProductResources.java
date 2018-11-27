@@ -114,4 +114,20 @@ public class ProductResources implements GenericResources<Beer>
 		return ResponseEntity.status(HttpStatus.OK).body(userPromotions);
 	}
 	
+	@RequestMapping(value = "/bycharacteristics/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Beer>> findBeerByUserCharacteristic(@PathVariable("id") Long id){
+		List<Beer> productsByCharacteristic = null;
+		
+		try
+		{
+			productsByCharacteristic = promotionService.listItemByUserCharacteristic(id);
+		}
+		catch(UserNotFoundException e)
+		{
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(productsByCharacteristic);
+	}
+	
 }

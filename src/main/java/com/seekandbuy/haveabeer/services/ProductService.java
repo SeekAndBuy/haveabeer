@@ -1,5 +1,7 @@
 package com.seekandbuy.haveabeer.services;
 
+import com.seekandbuy.haveabeer.match.SearchBeer;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +21,12 @@ public class ProductService implements GenericService<Beer>
 {	
 	@Autowired
 	private ProductDao promotionDao;
+	
+	
+	public List<Beer> listItemByUserCharacteristic(long id){
+		SearchBeer searchBeer = new SearchBeer();
+		return searchBeer.ListAllProductsByUser(id);
+	}
 	
 	@Override
 	public List<Beer> listItem()
