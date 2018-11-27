@@ -16,8 +16,7 @@ import com.seekandbuy.haveabeer.exceptions.ProductNotFoundException;
 
 @Service
 public class ProductService implements GenericService<Beer>
-{
-	
+{	
 	@Autowired
 	private ProductDao promotionDao;
 	
@@ -41,11 +40,10 @@ public class ProductService implements GenericService<Beer>
 	}
 	
 	@Override
-	@RequestMapping(method = RequestMethod.POST)
-	public Beer createItem(@RequestBody Beer promotion) 
+	public Beer createItem(Beer promotion) 
 	{
 		promotion.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma	
-		//promotion.getBeerCharacteristic().setId(null);
+		promotion.getBeerCharacteristic().setId(null);
 		return promotionDao.save(promotion);	
 	}
 	

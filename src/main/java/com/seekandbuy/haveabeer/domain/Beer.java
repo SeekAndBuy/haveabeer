@@ -2,6 +2,7 @@ package com.seekandbuy.haveabeer.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -27,6 +28,7 @@ public class Beer extends Product {
 	}
 	
 	@JsonInclude(Include.NON_NULL)
+	@Cascade(CascadeType.PERSIST)
 	@ManyToOne
 	private BeerUser user;
 	

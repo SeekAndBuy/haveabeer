@@ -14,6 +14,6 @@ import com.seekandbuy.haveabeer.domain.User;
 public interface UserDao extends GenericDao, JpaRepository<BeerUser, Long>{
 
 	@Query("SELECT u FROM BeerUser u WHERE u.email = :userEmail")
-	public User findUserByEmail(@Param("userEmail") String email);
+	public BeerUser findUserByEmail(@Param("userEmail") String email);
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,8 @@ public class ProductResources implements GenericResources<Beer>
 	}
 
 	@Override
-	public ResponseEntity<Void> createItem(Beer promotion) {
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> createItem(@RequestBody Beer promotion) {
 		promotion = promotionService.createItem(promotion);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().

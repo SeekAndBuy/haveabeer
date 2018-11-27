@@ -19,7 +19,6 @@ public class BeerUser extends User {
 	@ManyToOne
 	BeerCharacteristic beerCharacteristic;
 	
-	
 	public BeerCharacteristic getBeerCharacteristic() {
 		return beerCharacteristic;
 	}
