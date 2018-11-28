@@ -13,19 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.seekandbuy.haveabeer.domain.Beer;
+import com.seekandbuy.haveabeer.domain.BeerUser;
 import com.seekandbuy.haveabeer.dao.ProductDao;
+import com.seekandbuy.haveabeer.dao.UserDao;
 import com.seekandbuy.haveabeer.exceptions.ProductNotFoundException;
 
 @Service
-public class ProductService implements GenericService<Beer>
+public class ProductService extends GenericService<Beer>
 {	
 	@Autowired
 	private ProductDao promotionDao;
 	
+	private UserDao userDao;
 	
-	public List<Beer> listItemByUserCharacteristic(long id){
-		SearchBeer searchBeer = new SearchBeer();
-		return searchBeer.ListAllProductsByUser(id);
+	SearchBeer searchBeer = new SearchBeer();
+	
+	public List<Beer> listItemByUserCharacteristic(BeerUser user, List<Beer> allBeers){
+
+		return searchBeer.ListAllProductsByUser(user, allBeers);
 	}
 	
 	@Override

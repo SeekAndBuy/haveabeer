@@ -14,14 +14,14 @@ import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 
 @Service
-public class UserService implements GenericService<BeerUser>
+public class UserService extends GenericService<BeerUser>
 {	
 	@Autowired
 	private UserDao userDao;
 	
 	@Override
 	public List<BeerUser> listItem()
-	{
+	{	
 		return userDao.findAll();  
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,7 +56,8 @@ public class UserResources implements GenericResources<BeerUser>
 	}
 
 	@Override
-	public ResponseEntity<Optional<BeerUser>> findItem(Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Optional<BeerUser>> findItem(@PathVariable("id") Long id) {
 		Optional<BeerUser> user = null;
 		try
 		{

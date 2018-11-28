@@ -5,6 +5,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.seekandbuy.haveabeer.HaveabeerApplication;
 import com.seekandbuy.haveabeer.domain.Beer;
+import com.seekandbuy.haveabeer.domain.BeerUser;
 import com.seekandbuy.haveabeer.domain.Product;
 //import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.ProductNotFoundException;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 import com.seekandbuy.haveabeer.services.ProductService;
+import com.seekandbuy.haveabeer.services.UserService;
 
 
 @RestController
@@ -32,11 +37,16 @@ import com.seekandbuy.haveabeer.services.ProductService;
 @CrossOrigin(origins="http://localhost:4200")
 public class ProductResources implements GenericResources<Beer>
 {
+	@Autowired
 	private ProductService promotionService;
 	
-	public ProductResources(ProductService promotionService) 
+	@Autowired
+	private UserService userService;
+	
+	public ProductResources(ProductService promotionService, UserService userService) 
 	{
 		this.promotionService = promotionService;
+		this.userService = userService;
 	}
 
 	@Override
@@ -70,7 +80,8 @@ public class ProductResources implements GenericResources<Beer>
 	}
 
 	@Override
-	public ResponseEntity<Void> deleteItem(Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteItem(@PathVariable("id") Long id) {
 		try
 		{
 			promotionService.deleteItem(id);
@@ -118,9 +129,17 @@ public class ProductResources implements GenericResources<Beer>
 	public ResponseEntity<List<Beer>> findBeerByUserCharacteristic(@PathVariable("id") Long id){
 		List<Beer> productsByCharacteristic = null;
 		
+		List<Beer> allBeers = null;
+		Optional<BeerUser> userBeer = null;		
+		
 		try
 		{
-			productsByCharacteristic = promotionService.listItemByUserCharacteristic(id);
+			userBeer = userService.findItem(id);
+			BeerUser user = (BeerUser) userBeer.get();
+			
+			allBeers = promotionService.listItem();
+			
+			productsByCharacteristic = promotionService.listItemByUserCharacteristic(user, allBeers);
 		}
 		catch(UserNotFoundException e)
 		{
@@ -130,4 +149,10 @@ public class ProductResources implements GenericResources<Beer>
 		return ResponseEntity.status(HttpStatus.OK).body(productsByCharacteristic);
 	}
 	
+	public static void main(String[] args) {
+		SpringApplication.run(HaveabeerApplication.class, args);
+	}
+	
 }
+
+

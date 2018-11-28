@@ -17,19 +17,18 @@ import com.seekandbuy.haveabeer.domain.Beer;
 import com.seekandbuy.haveabeer.domain.BeerCharacteristic;
 import com.seekandbuy.haveabeer.domain.BeerUser;
 
-public class SearchBeer implements SearchItems {
-
-	@Autowired
-	private ProductDao promotionDao;
-	private UserDao userDao;
-	
+public class SearchBeer extends SearchItems<BeerUser, Beer> {
 	
 	@Override
-	public List<Beer> ListAllProductsByUser(Long id) {
-		Optional<BeerUser> user = userDao.findById(id);
+	public List<Beer> ListAllProductsByUser(BeerUser user, List<Beer> allBeers) {
+		//System.out.println(id);
+		//Optional<BeerUser> user = userDao.findById(id);
 		
-		BeerUser userbeer = (BeerUser) user.get();
-		BeerCharacteristic characteristicUser = userbeer.getBeerCharacteristic();
+		//BeerUser userbeer = (BeerUser) user.get();
+		BeerCharacteristic characteristicUser = user.getBeerCharacteristic();
+		
+		//System.out.println(characteristicUser.getBrand());
+		//System.out.println(characteristicUser.getPrice());
 		
 		//classe para armazenar a tupla <product, quantidade de matchs>
 		class CharacteristicAndMatchs{
@@ -52,7 +51,7 @@ public class SearchBeer implements SearchItems {
 		List<CharacteristicAndMatchs> characteristicMatchs = new ArrayList<CharacteristicAndMatchs>();
 		List<Beer> productsByUser = new ArrayList<Beer>();
 		
-		for(Beer p: promotionDao.findAll()) {
+		for(Beer p: allBeers) {
 			BeerCharacteristic characteristicProduct = (BeerCharacteristic) p.getBeerCharacteristic();
 			int matchSize = this.countMatchs(characteristicUser, characteristicProduct);
 			CharacteristicAndMatchs matchCharacter = new CharacteristicAndMatchs(p, matchSize);
@@ -60,7 +59,7 @@ public class SearchBeer implements SearchItems {
 		}
 		
 		Collections.sort(characteristicMatchs, 
-				Comparator.comparingInt(CharacteristicAndMatchs::getMatchValue).reversed()); //ordenando em ordem decrescente
+		Comparator.comparingInt(CharacteristicAndMatchs::getMatchValue).reversed()); //ordenando em ordem decrescente
 		
 		for(CharacteristicAndMatchs c : characteristicMatchs) //armazenando apenas os produtos em productByUser
 		{
@@ -77,7 +76,7 @@ public class SearchBeer implements SearchItems {
 		
 		if(charaUser.getBrand().equals(charaBeer.getBrand()))
 			equal++;
-		if(charaUser.getPrice() == charaBeer.getPrice())
+		if(charaUser.getPrice() <= charaBeer.getPrice())
 			equal++;
 		
 		return equal;

@@ -1,7 +1,7 @@
 package com.seekandbuy.haveabeer.match;
 import java.util.List;
 
-
-public interface SearchItems {
-	public <T> List<T> ListAllProductsByUser(Long id);
+public abstract class SearchItems<X, T> {
+	
+	public abstract List<T> ListAllProductsByUser(X x, List<T> t);
 }
