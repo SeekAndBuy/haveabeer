@@ -48,12 +48,34 @@ public class SearchBeer extends SearchItems<BeerUser, Beer> {
 			}
 		}
 		
+		class SortbyBeer implements Comparator<Beer> 
+		{ 
+		    // Used for sorting in ascending order of 
+		    // roll number 
+			@Override
+			public int compare(Beer b1, Beer b2) {
+				
+				double value = b1.getBeerCharacteristic().getPrice() - b2.getBeerCharacteristic().getPrice();
+				
+				if(value < 0)
+					return -1;
+				if(value > 0)
+					return 1;
+				else
+					return 0;
+			} 
+		}
+		
 		List<CharacteristicAndMatchs> characteristicMatchs = new ArrayList<CharacteristicAndMatchs>();
 		List<Beer> productsByUser = new ArrayList<Beer>();
 		
+		Collections.sort(allBeers, new SortbyBeer());
+		
 		for(Beer p: allBeers) {
+			
 			BeerCharacteristic characteristicProduct = (BeerCharacteristic) p.getBeerCharacteristic();
-			int matchSize = this.countMatchs(characteristicUser, characteristicProduct);
+			int matchSize = this.countMatchs(characteristicUser, characteristicProduct);		
+			
 			CharacteristicAndMatchs matchCharacter = new CharacteristicAndMatchs(p, matchSize);
 			characteristicMatchs.add(matchCharacter);
 		}
@@ -75,9 +97,14 @@ public class SearchBeer extends SearchItems<BeerUser, Beer> {
 		int equal = 0;
 		
 		if(charaUser.getBrand().equals(charaBeer.getBrand()))
+			equal += 2;
+		if(charaBeer.getPrice() <= charaUser.getPrice())
 			equal++;
-		if(charaUser.getPrice() <= charaBeer.getPrice())
-			equal++;
+		
+		System.out.println(charaBeer.getBrand());
+		System.out.println(charaBeer.getPrice());
+		System.out.println(equal);
+		System.out.println();
 		
 		return equal;
 	}

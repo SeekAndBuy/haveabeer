@@ -71,7 +71,8 @@ public class UserResources implements GenericResources<BeerUser>
 	}
 
 	@Override
-	public ResponseEntity<Void> deleteItem(Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteItem(@PathVariable("id") Long id) {
 		try
 		{
 			userService.deleteItem(id);
