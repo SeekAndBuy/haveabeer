@@ -6,10 +6,13 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.seekandbuy.haveabeer.auth.Authentication;
+import com.seekandbuy.haveabeer.validator.Validator;
 
 @Service
 public abstract class GenericService<T> 
 {
+	public Validator<T> validateItem;
+	
 	public Authentication auth = new Authentication();
 	
 	public abstract List<T> listItem();

@@ -24,8 +24,6 @@ public class ProductService extends GenericService<Beer>
 	@Autowired
 	private ProductDao promotionDao;
 	
-	private UserDao userDao;
-	
 	SearchBeer searchBeer = new SearchBeer();
 	
 	public List<Beer> listItemByUserCharacteristic(BeerUser user, List<Beer> allBeers){
